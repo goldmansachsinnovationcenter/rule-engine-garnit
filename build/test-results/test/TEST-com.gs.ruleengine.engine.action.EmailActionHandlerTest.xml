@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gs.ruleengine.engine.action.EmailActionHandlerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-03-25T04:50:22" hostname="devin-box" time="0.008">
+  <properties/>
+  <testcase name="testCanHandle()" classname="com.gs.ruleengine.engine.action.EmailActionHandlerTest" time="0.001"/>
+  <testcase name="testExecute_Success()" classname="com.gs.ruleengine.engine.action.EmailActionHandlerTest" time="0.003"/>
+  <testcase name="testExecute_RuleResultFalse()" classname="com.gs.ruleengine.engine.action.EmailActionHandlerTest" time="0.001"/>
+  <system-out><![CDATA[04:50:22.382 [Test worker] INFO com.gs.ruleengine.engine.action.EmailActionHandler - Sending email to: [test@example.com]
+04:50:22.382 [Test worker] INFO com.gs.ruleengine.engine.action.EmailActionHandler - Email subject: Test Subject
+04:50:22.382 [Test worker] INFO com.gs.ruleengine.engine.action.EmailActionHandler - Email template: Test Template
+04:50:22.383 [Test worker] INFO com.gs.ruleengine.engine.action.EmailActionHandler - Entity details: {title=Test Ticket, status=OPEN, id=1, priority=1}
+04:50:22.386 [Test worker] INFO com.gs.ruleengine.engine.action.EmailActionHandler - Rule result is false, skipping email action for rule: 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

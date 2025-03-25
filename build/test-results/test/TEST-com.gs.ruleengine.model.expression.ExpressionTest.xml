@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gs.ruleengine.model.expression.ExpressionTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-03-25T04:50:26" hostname="devin-box" time="0.008">
+  <properties/>
+  <testcase name="testConditionGreaterThan()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.0"/>
+  <testcase name="testConditionNotEquals()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.0"/>
+  <testcase name="testConditionLessThan()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.001"/>
+  <testcase name="testOrExpression()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.001"/>
+  <testcase name="testConditionEquals()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.001"/>
+  <testcase name="testMissingField()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.0"/>
+  <testcase name="testComplexExpression()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.0"/>
+  <testcase name="testConditionContains()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.0"/>
+  <testcase name="testNullValues()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.001"/>
+  <testcase name="testAndExpression()" classname="com.gs.ruleengine.model.expression.ExpressionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
