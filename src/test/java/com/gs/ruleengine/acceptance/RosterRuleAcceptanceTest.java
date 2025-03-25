@@ -106,7 +106,7 @@ public class RosterRuleAcceptanceTest {
         ruleMap.put("description", rule.getDescription());
         ruleMap.put("entityType", rule.getEntityType());
         try {
-            ruleMap.put("expression", objectMapper.readTree(rule.getExpressionJson()));
+            ruleMap.put("expression", new ObjectMapper().readTree(rule.getExpressionJson()));
         } catch (Exception e) {
             // Fallback to string if parsing fails
             ruleMap.put("expression", rule.getExpressionJson());
@@ -137,7 +137,7 @@ public class RosterRuleAcceptanceTest {
         actionMap.put("name", actionConfig.getName());
         try {
             // Parse the configurationJson to an object for the configuration field
-            actionMap.put("configuration", objectMapper.readTree(actionConfig.getConfigurationJson()));
+            actionMap.put("configuration", new ObjectMapper().readTree(actionConfig.getConfigurationJson()));
         } catch (Exception e) {
             // Fallback to string if parsing fails
             actionMap.put("configuration", actionConfig.getConfigurationJson());
