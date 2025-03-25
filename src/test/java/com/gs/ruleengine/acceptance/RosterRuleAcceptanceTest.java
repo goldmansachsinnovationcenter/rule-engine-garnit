@@ -173,7 +173,7 @@ public class RosterRuleAcceptanceTest {
         
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
         ResponseEntity<Map> evaluationResponse = restTemplate.exchange(
-                baseUrl + "/engine/evaluate",
+                baseUrl + "/rule-engine/execute",
                 HttpMethod.POST,
                 requestEntity,
                 Map.class
