@@ -168,7 +168,7 @@ public class RuleEngineAcceptanceTest {
         // POST to the rule engine endpoint
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("entityId", savedTicket.getId());
-        requestBody.put("entityType", EntityType.TICKET);
+        requestBody.put("entityType", EntityType.TICKET.toString());
         // We don't specify ruleIds to evaluate all active rules for this entity type
         
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);

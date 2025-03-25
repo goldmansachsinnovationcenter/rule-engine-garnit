@@ -144,11 +144,11 @@ public class LeaveRuleAcceptanceTest {
         // POST to the rule engine endpoint
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("entityId", savedLeave.getId());
-        requestBody.put("entityType", EntityType.LEAVE);
+        requestBody.put("entityType", EntityType.LEAVE.toString());
         
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
         ResponseEntity<Map> evaluationResponse = restTemplate.exchange(
-                baseUrl + "/engine/evaluate",
+                baseUrl + "/rule-engine/execute",
                 HttpMethod.POST,
                 requestEntity,
                 Map.class
