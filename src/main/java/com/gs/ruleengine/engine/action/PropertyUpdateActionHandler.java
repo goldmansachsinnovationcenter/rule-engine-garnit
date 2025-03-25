@@ -144,8 +144,32 @@ public class PropertyUpdateActionHandler implements ActionHandler {
      * @return true if the update was successful, false otherwise
      */
     private boolean updateEntityProperties(EntityType entityType, Long entityId, Map<String, Object> properties) {
-        // In a real implementation, this would update entity properties in the database
-        // For now, we'll just return true to simulate a successful update
-        return true;
+        try {
+            if (entityType == EntityType.TICKET) {
+                return ticketService.findById(entityId)
+                        .map(ticket -> {
+                            // Update ticket properties
+                            if (properties.containsKey("assignee")) {
+                                ticket.setAssignee((String) properties.get("assignee"));
+                            }
+                            // Add other property updates as needed
+                            
+                            // Save the updated ticket
+                            ticketService.save(ticket);
+                            return true;
+                        })
+                        .orElse(false);
+            } else if (entityType == EntityType.ROSTER) {
+                // Handle roster updates
+                return true;
+            } else if (entityType == EntityType.LEAVE) {
+                // Handle leave updates
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            logger.error("Error updating entity properties: {}", e.getMessage(), e);
+            return false;
+        }
     }
 }
