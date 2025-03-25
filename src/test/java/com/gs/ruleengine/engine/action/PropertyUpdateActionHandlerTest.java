@@ -89,6 +89,9 @@ class PropertyUpdateActionHandlerTest {
         
         when(objectMapper.readValue(anyString(), eq(PropertyUpdateActionConfig.class))).thenReturn(config);
         
+        // Mock ticket service to return a ticket
+        when(ticketService.findById(eq(1L))).thenReturn(java.util.Optional.of(new com.gs.ruleengine.model.Ticket()));
+        
         // Execute
         ActionOutput output = propertyUpdateActionHandler.execute(ruleEngineOutput, actionConfiguration, entityData);
         
