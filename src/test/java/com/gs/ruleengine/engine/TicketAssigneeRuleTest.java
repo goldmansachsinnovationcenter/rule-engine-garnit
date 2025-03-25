@@ -206,6 +206,9 @@ public class TicketAssigneeRuleTest {
         assertEquals(EntityType.TICKET, output.getEntityType());
         assertTrue(output.isSuccess());
         assertEquals("Properties updated successfully", output.getMessage());
+        
+        // Verify the assignee property was updated to "nitin"
+        assertEquals("nitin", propertiesToUpdate.get("assignee"));
     }
     
     @Test
