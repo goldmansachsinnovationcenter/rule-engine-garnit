@@ -66,6 +66,9 @@ public class LeaveRuleAcceptanceTest {
 
     @Autowired
     private LeaveService leaveService;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private String baseUrl;
     private HttpHeaders headers;
