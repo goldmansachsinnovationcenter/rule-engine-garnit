@@ -1,0 +1,50 @@
+Rule Engine Application Architecture
+===================================
+
++-------------------+        +-------------------+        +-------------------+
+|                   |        |                   |        |                   |
+|  REST API Layer   |<------>|  Service Layer    |<------>|  Repository Layer |
+|                   |        |                   |        |                   |
++-------------------+        +-------------------+        +-------------------+
+         ^                           ^                            ^
+         |                           |                            |
+         v                           v                            v
++-------------------+        +-------------------+        +-------------------+
+|                   |        |                   |        |                   |
+|  Rule Controller  |        |  Rule Engine      |        |  Entity Services  |
+|  Action Controller|        |  Action Engine    |        |  (Ticket, Roster, |
+|                   |        |                   |        |   Leave)          |
++-------------------+        +-------------------+        +-------------------+
+                                      ^
+                                      |
+                                      v
+                             +-------------------+
+                             |                   |
+                             |  Expression       |
+                             |  Evaluator        |
+                             |                   |
+                             +-------------------+
+                                      ^
+                                      |
+                                      v
+                             +-------------------+
+                             |                   |
+                             |  Action Handlers  |
+                             |  - Email          |
+                             |  - Aggregation    |
+                             |  - Property Update|
+                             +-------------------+
+
+Flow:
+1. Client sends request to REST API
+2. Rule Controller processes request
+3. Rule Engine evaluates rules using Expression Evaluator
+4. Action Engine executes actions using Action Handlers
+5. Results are returned to client
+
+Data Flow:
+- Rules are stored in database
+- Action configurations are stored in database
+- Entity data is retrieved from respective services
+- Rule evaluation results are passed to Action Engine
+- Action outputs are returned to client
