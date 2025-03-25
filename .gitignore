@@ -15,6 +15,7 @@ build/
 
 # Compiled class files
 *.class
+bin/
 
 # Log files
 *.log
