@@ -6,6 +6,7 @@ import com.gs.ruleengine.model.ActionConfiguration;
 import com.gs.ruleengine.model.ActionOutput;
 import com.gs.ruleengine.model.ActionType;
 import com.gs.ruleengine.model.EntityType;
+import com.gs.ruleengine.model.TicketStatus;
 import com.gs.ruleengine.model.RuleEngineOutput;
 import com.gs.ruleengine.model.action.PropertyUpdateActionConfig;
 import com.gs.ruleengine.service.LeaveService;
@@ -149,10 +150,23 @@ public class PropertyUpdateActionHandler implements ActionHandler {
                 return ticketService.findById(entityId)
                         .map(ticket -> {
                             // Update ticket properties
-                            if (properties.containsKey("assignee")) {
-                                ticket.setAssignee((String) properties.get("assignee"));
+                            for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                                String propertyName = entry.getKey();
+                                Object propertyValue = entry.getValue();
+                                
+                                if ("assignee".equals(propertyName)) {
+                                    ticket.setAssignee((String) propertyValue);
+                                } else if ("status".equals(propertyName)) {
+                                    ticket.setStatus(TicketStatus.valueOf((String) propertyValue));
+                                } else if ("priority".equals(propertyName)) {
+                                    if (propertyValue instanceof Integer) {
+                                        ticket.setPriority((Integer) propertyValue);
+                                    } else if (propertyValue instanceof String) {
+                                        ticket.setPriority(Integer.parseInt((String) propertyValue));
+                                    }
+                                }
+                                // Add other property updates as needed
                             }
-                            // Add other property updates as needed
                             
                             // Save the updated ticket
                             ticketService.save(ticket);
@@ -160,11 +174,39 @@ public class PropertyUpdateActionHandler implements ActionHandler {
                         })
                         .orElse(false);
             } else if (entityType == EntityType.ROSTER) {
-                // Handle roster updates
-                return true;
+                return rosterService.findById(entityId)
+                        .map(roster -> {
+                            // Update roster properties based on the properties map
+                            for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                                String propertyName = entry.getKey();
+                                Object propertyValue = entry.getValue();
+                                
+                                // Update roster properties based on property name
+                                // Implementation depends on Roster class properties
+                            }
+                            
+                            // Save the updated roster
+                            rosterService.save(roster);
+                            return true;
+                        })
+                        .orElse(false);
             } else if (entityType == EntityType.LEAVE) {
-                // Handle leave updates
-                return true;
+                return leaveService.findById(entityId)
+                        .map(leave -> {
+                            // Update leave properties based on the properties map
+                            for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                                String propertyName = entry.getKey();
+                                Object propertyValue = entry.getValue();
+                                
+                                // Update leave properties based on property name
+                                // Implementation depends on Leave class properties
+                            }
+                            
+                            // Save the updated leave
+                            leaveService.save(leave);
+                            return true;
+                        })
+                        .orElse(false);
             }
             return false;
         } catch (Exception e) {
