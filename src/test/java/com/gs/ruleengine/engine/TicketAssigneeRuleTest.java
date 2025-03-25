@@ -192,6 +192,9 @@ public class TicketAssigneeRuleTest {
         
         when(objectMapper.readValue(anyString(), eq(PropertyUpdateActionConfig.class))).thenReturn(config);
         
+        // Mock ticket service to return a ticket
+        when(ticketService.findById(anyLong())).thenReturn(Optional.of(testTicket));
+        
         // Update the entity data map to simulate the action handler's effect
         entityData.put("assignee", "nitin");
         
