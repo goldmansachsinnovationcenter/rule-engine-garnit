@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.18'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
+    id 'jacoco'
 }
 
 group = 'com.gs'
@@ -25,4 +26,36 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = true
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/html')
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.5
+            }
+        }
+    }
+}
+
+task generateCoverageReport(type: JavaExec) {
+    dependsOn jacocoTestReport
+    main = 'com.gs.ruleengine.util.CoverageReportGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+    args = [layout.buildDirectory.get().toString() + '/reports/jacoco/test.xml']
 }
