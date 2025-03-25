@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gs.ruleengine.engine.RuleEngineTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-03-25T04:50:26" hostname="devin-box" time="0.028">
+  <properties/>
+  <testcase name="testEvaluateRuleWithData_Success()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.003"/>
+  <testcase name="testEvaluateRules_EntityNotFound()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.003"/>
+  <testcase name="testEvaluateRuleWithData_RuleNotFound()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.002"/>
+  <testcase name="testEvaluateRule_ExpressionDeserializationFailed()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.003"/>
+  <testcase name="testEvaluateRules_Success()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.003"/>
+  <testcase name="testEvaluateRules_NoRulesFound()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.002"/>
+  <testcase name="testEvaluateRule_RuleNotFound()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.002"/>
+  <testcase name="testEvaluateRule_EntityNotFound()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.002"/>
+  <testcase name="testEvaluateRule_Success()" classname="com.gs.ruleengine.engine.RuleEngineTest" time="0.002"/>
+  <system-out><![CDATA[2025-03-25 04:50:26.564 ERROR 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : Entity not found with ID: 1 and type: TICKET
+2025-03-25 04:50:26.567 ERROR 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : Rule not found with ID: 1
+2025-03-25 04:50:26.571 ERROR 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : Failed to deserialize expression for rule: 1
+2025-03-25 04:50:26.577  INFO 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : No active rules found for entity type: TICKET
+2025-03-25 04:50:26.580 ERROR 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : Rule not found with ID: 1
+2025-03-25 04:50:26.582 ERROR 40467 --- [    Test worker] c.g.ruleengine.engine.DefaultRuleEngine  : Entity not found with ID: 1 and type: TICKET
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
