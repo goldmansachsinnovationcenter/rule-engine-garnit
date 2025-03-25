@@ -26,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -64,6 +65,9 @@ public class RosterRuleAcceptanceTest {
 
     @Autowired
     private RosterService rosterService;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private String baseUrl;
     private HttpHeaders headers;
@@ -100,8 +104,20 @@ public class RosterRuleAcceptanceTest {
         // Step 1: Create a rule for understaffed shifts (< 3 employees)
         Rule rule = createUnderstaffedShiftRule();
         
-        // POST the rule to the API
-        HttpEntity<Rule> ruleEntity = new HttpEntity<>(rule, headers);
+        // POST the rule to the API using RuleDto format
+        Map<String, Object> ruleMap = new HashMap<>();
+        ruleMap.put("name", rule.getName());
+        ruleMap.put("description", rule.getDescription());
+        ruleMap.put("entityType", rule.getEntityType());
+        try {
+            ruleMap.put("expression", objectMapper.readTree(rule.getExpressionJson()));
+        } catch (Exception e) {
+            // Fallback to string if parsing fails
+            ruleMap.put("expression", rule.getExpressionJson());
+        }
+        ruleMap.put("active", rule.isActive());
+        
+        HttpEntity<Map<String, Object>> ruleEntity = new HttpEntity<>(ruleMap, headers);
         ResponseEntity<Rule> ruleResponse = restTemplate.exchange(
                 baseUrl + "/rules",
                 HttpMethod.POST,
@@ -118,10 +134,23 @@ public class RosterRuleAcceptanceTest {
         // Step 2: Create an email notification action for the rule
         ActionConfiguration actionConfig = createManagerEmailNotificationAction(createdRule.getId().toString());
         
-        // POST the action configuration to the API
-        HttpEntity<ActionConfiguration> actionEntity = new HttpEntity<>(actionConfig, headers);
+        // POST the action configuration to the API using ActionConfigurationDto format
+        Map<String, Object> actionMap = new HashMap<>();
+        actionMap.put("ruleId", actionConfig.getRuleId());
+        actionMap.put("actionType", actionConfig.getActionType());
+        actionMap.put("name", actionConfig.getName());
+        try {
+            // Parse the configurationJson to an object for the configuration field
+            actionMap.put("configuration", objectMapper.readTree(actionConfig.getConfigurationJson()));
+        } catch (Exception e) {
+            // Fallback to string if parsing fails
+            actionMap.put("configuration", actionConfig.getConfigurationJson());
+        }
+        actionMap.put("active", true);
+        
+        HttpEntity<Map<String, Object>> actionEntity = new HttpEntity<>(actionMap, headers);
         ResponseEntity<ActionConfiguration> actionResponse = restTemplate.exchange(
-                baseUrl + "/actions",
+                baseUrl + "/actions/configurations",
                 HttpMethod.POST,
                 actionEntity,
                 ActionConfiguration.class
