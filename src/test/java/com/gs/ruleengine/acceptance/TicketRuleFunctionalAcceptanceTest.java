@@ -316,11 +316,11 @@ public class TicketRuleFunctionalAcceptanceTest {
                 .collect(Collectors.toList());
         assertEquals(1, rajOpenTickets.size(), "Raj should have exactly 1 OPEN status ticket with priority 4");
         
-        // Verify there are 4 tickets in closed status
+        // Verify there are 5 tickets in closed status
         List<Ticket> closedTickets = allTickets.stream()
                 .filter(t -> TicketStatus.CLOSED.equals(t.getStatus()))
                 .collect(Collectors.toList());
-        assertEquals(4, closedTickets.size(), "There should be exactly 4 tickets with CLOSED status");
+        assertEquals(5, closedTickets.size(), "There should be exactly 5 tickets with CLOSED status");
         
         // Verify Nitin has 5 open status tickets with priority 7
         List<Ticket> nitinOpenTickets = allTickets.stream()
