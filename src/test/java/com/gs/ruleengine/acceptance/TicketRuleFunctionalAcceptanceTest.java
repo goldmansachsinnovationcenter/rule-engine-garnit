@@ -10,6 +10,7 @@ import com.gs.ruleengine.model.TicketStatus;
 import com.gs.ruleengine.service.ActionConfigurationService;
 import com.gs.ruleengine.service.RuleService;
 import com.gs.ruleengine.service.TicketService;
+import org.springframework.test.annotation.DirtiesContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * These tests validate that the rule engine correctly applies business rules to tickets.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
 public class TicketRuleFunctionalAcceptanceTest {
 
     @LocalServerPort
@@ -331,8 +333,8 @@ public class TicketRuleFunctionalAcceptanceTest {
      * Helper method to verify the expected state after second rule execution
      * 
      * Validation criteria after second execution:
-     * 1. There should be exactly 4 tickets with a status of "Closed"
-     * 2. Raj should have 7 tickets with an "Open" status and a priority of 3
+     * 1. There should be exactly 5 tickets with a status of "Closed"
+     * 2. Raj should have 5 tickets with an "Open" status and a priority of 4
      * 3. Both Nitin and SERVICE_QUEUE should have no tickets allocated
      */
     private void verifyExpectedStateAfterSecondRuleExecution() {
