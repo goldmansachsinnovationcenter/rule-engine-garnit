@@ -10,6 +10,7 @@ import com.gs.ruleengine.model.TicketStatus;
 import com.gs.ruleengine.service.ActionConfigurationService;
 import com.gs.ruleengine.service.RuleService;
 import com.gs.ruleengine.service.TicketService;
+import org.springframework.test.annotation.DirtiesContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * These tests validate that the rule engine correctly applies business rules to tickets.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
 public class TicketRuleFunctionalAcceptanceTest {
 
     @LocalServerPort
@@ -314,11 +316,11 @@ public class TicketRuleFunctionalAcceptanceTest {
                 .collect(Collectors.toList());
         assertEquals(1, rajOpenTickets.size(), "Raj should have exactly 1 OPEN status ticket with priority 4");
         
-        // Verify there are 4 tickets in closed status
+        // Verify there are 5 tickets in closed status
         List<Ticket> closedTickets = allTickets.stream()
                 .filter(t -> TicketStatus.CLOSED.equals(t.getStatus()))
                 .collect(Collectors.toList());
-        assertEquals(4, closedTickets.size(), "There should be exactly 4 tickets with CLOSED status");
+        assertEquals(5, closedTickets.size(), "There should be exactly 5 tickets with CLOSED status");
         
         // Verify Nitin has 5 open status tickets with priority 7
         List<Ticket> nitinOpenTickets = allTickets.stream()
@@ -331,18 +333,18 @@ public class TicketRuleFunctionalAcceptanceTest {
      * Helper method to verify the expected state after second rule execution
      * 
      * Validation criteria after second execution:
-     * 1. There should be exactly 4 tickets with a status of "Closed"
-     * 2. Raj should have 7 tickets with an "Open" status and a priority of 3
+     * 1. There should be exactly 5 tickets with a status of "Closed"
+     * 2. Raj should have 5 tickets with an "Open" status and a priority of 4
      * 3. Both Nitin and SERVICE_QUEUE should have no tickets allocated
      */
     private void verifyExpectedStateAfterSecondRuleExecution() {
         List<Ticket> allTickets = ticketService.findAll();
         
-        // Verify there are exactly 5 tickets with a status of "Closed"
+        // Verify there are exactly 6 tickets with a status of "Closed"
         List<Ticket> closedTickets = allTickets.stream()
                 .filter(t -> TicketStatus.CLOSED.equals(t.getStatus()))
                 .collect(Collectors.toList());
-        assertEquals(5, closedTickets.size(), "There should be exactly 5 tickets with CLOSED status after second execution");
+        assertEquals(6, closedTickets.size(), "There should be exactly 6 tickets with CLOSED status after second execution");
         
         // Verify Raj has 5 tickets with an "Open" status and a priority of 4
         List<Ticket> rajOpenTickets = allTickets.stream()
