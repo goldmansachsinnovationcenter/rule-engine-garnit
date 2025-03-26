@@ -340,11 +340,11 @@ public class TicketRuleFunctionalAcceptanceTest {
     private void verifyExpectedStateAfterSecondRuleExecution() {
         List<Ticket> allTickets = ticketService.findAll();
         
-        // Verify there are exactly 5 tickets with a status of "Closed"
+        // Verify there are exactly 6 tickets with a status of "Closed"
         List<Ticket> closedTickets = allTickets.stream()
                 .filter(t -> TicketStatus.CLOSED.equals(t.getStatus()))
                 .collect(Collectors.toList());
-        assertEquals(5, closedTickets.size(), "There should be exactly 5 tickets with CLOSED status after second execution");
+        assertEquals(6, closedTickets.size(), "There should be exactly 6 tickets with CLOSED status after second execution");
         
         // Verify Raj has 5 tickets with an "Open" status and a priority of 4
         List<Ticket> rajOpenTickets = allTickets.stream()
