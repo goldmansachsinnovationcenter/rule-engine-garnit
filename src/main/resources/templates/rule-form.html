@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine - Create Rule</title>
+    <link rel="stylesheet" href="/css/enhanced-ui.css">
+    <script src="/js/enhanced-ui.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rule Engine GARNIT</h1>
+            <nav>
+                <a href="/rules">Rules</a>
+                <a href="/actions">Actions</a>
+                <a href="/reports">Reports</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>Create New Rule</h2>
+            
+            <form id="ruleForm" data-validate="true" method="post" action="/api/rules">
+                <div class="form-field">
+                    <label for="ruleName" class="required">Rule Name</label>
+                    <input type="text" id="ruleName" name="ruleName" required 
+                           aria-describedby="ruleName-help" />
+                    <div id="ruleName-help" class="sr-only">Enter a descriptive name for the rule</div>
+                </div>
+
+                <div class="form-field">
+                    <label for="entityType" class="required">Entity Type</label>
+                    <select id="entityType" name="entityType" required 
+                            aria-describedby="entityType-help">
+                        <option value="">Select entity type</option>
+                        <option value="TICKET">Ticket</option>
+                        <option value="ROSTER">Roster</option>
+                        <option value="LEAVE">Leave</option>
+                    </select>
+                    <div id="entityType-help" class="sr-only">Choose the type of entity this rule applies to</div>
+                </div>
+
+                <div class="form-field">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" 
+                              aria-describedby="description-help"></textarea>
+                    <div id="description-help" class="sr-only">Provide a detailed description of what this rule does</div>
+                </div>
+
+                <div class="form-field">
+                    <label for="expression" class="required">Rule Expression</label>
+                    <textarea id="expression" name="expression" rows="6" required 
+                              aria-describedby="expression-help" 
+                              placeholder="Example: field1 == 'value' AND field2 > 100"></textarea>
+                    <div id="expression-help" class="sr-only">Enter the logical expression for this rule</div>
+                </div>
+
+                <div class="form-field">
+                    <label>
+                        <input type="checkbox" id="active" name="active" checked />
+                        Active Rule
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-enhanced btn-secondary" onclick="history.back()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn-enhanced">
+                        Create Rule
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <button class="fab-button" aria-label="Quick actions" data-modal-target="quickActionsModal">
+            +
+        </button>
+
+        <div id="quickActionsModal" class="modal" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Quick Actions</h3>
+                    <button class="modal-close" data-modal-close aria-label="Close modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Choose a quick action:</p>
+                    <ul>
+                        <li><a href="/rules/templates">Use Rule Template</a></li>
+                        <li><a href="/rules/import">Import Rules</a></li>
+                        <li><a href="/actions/create">Create Action</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('ruleForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                
+                fetch('/api/rules', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.RuleEngineUI.prototype.showToast('Rule created successfully!', 'success');
+                        setTimeout(() => {
+                            window.location.href = '/rules';
+                        }, 1500);
+                    } else {
+                        throw new Error('Failed to create rule');
+                    }
+                })
+                .catch(error => {
+                    window.RuleEngineUI.prototype.showToast('Error: ' + error.message, 'error');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
