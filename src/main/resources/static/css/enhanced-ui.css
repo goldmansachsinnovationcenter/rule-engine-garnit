@@ -1,0 +1,361 @@
+/* Enhanced UI styles for Rule Engine GARNIT */
+
+/* Form validation styles */
+.form-error {
+  border: 2px solid #dc3545 !important;
+  background-color: #fff5f5 !important;
+}
+
+.form-success {
+  border: 2px solid #28a745 !important;
+  background-color: #f0fff4 !important;
+}
+
+.validation-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.validation-error::before {
+  content: "⚠ ";
+  font-weight: bold;
+}
+
+.form-error-summary {
+  background-color: #fff5f5;
+  border: 2px solid #dc3545;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.form-error-summary h3 {
+  color: #dc3545;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.form-error-summary ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.form-error-summary li {
+  margin-bottom: 0.25rem;
+}
+
+.form-error-summary a {
+  color: #dc3545;
+  text-decoration: underline;
+}
+
+.form-error-summary a:hover {
+  text-decoration: none;
+}
+
+/* Loading states */
+.form-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.form-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced button styles */
+.btn-enhanced {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-enhanced:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+.btn-enhanced:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-enhanced:focus {
+  outline: 2px solid #80bdff;
+  outline-offset: 2px;
+}
+
+.btn-enhanced.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-enhanced.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+.btn-enhanced.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-enhanced.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-enhanced.btn-success {
+  background-color: #28a745;
+}
+
+.btn-enhanced.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Modal improvements */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+  z-index: 1001;
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+/* Toast notifications */
+.toast {
+  min-width: 300px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.toast-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.toast-error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.toast-warning {
+  background-color: #fff3cd;
+  border-color: #ffeaa7;
+  color: #856404;
+}
+
+.toast-info {
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+  color: #0c5460;
+}
+
+/* FAB button styles */
+.fab-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.fab-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  transform: scale(1.05);
+}
+
+.fab-button:active {
+  transform: scale(0.95);
+}
+
+.fab-button:focus {
+  outline: 2px solid #80bdff;
+  outline-offset: 2px;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Keyboard navigation */
+.keyboard-navigation *:focus {
+  outline: 2px solid #007bff !important;
+  outline-offset: 2px !important;
+}
+
+.keyboard-navigation button:focus,
+.keyboard-navigation input:focus,
+.keyboard-navigation select:focus,
+.keyboard-navigation textarea:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fab-button {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .modal-content {
+    margin: 20px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
+  }
+  
+  .toast {
+    min-width: 280px;
+    margin: 0 10px 10px 10px;
+  }
+}
+
+/* Form field improvements */
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 0;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-field .required::after {
+  content: " *";
+  color: #dc3545;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
